@@ -1,0 +1,13 @@
+<!--<a ui-sref="home">home</a>
+<ui-view></ui-view>-->
+<!--<chat-component></chat-component>-->
+<ui-view>
+<div class="container">
+<h1>Welcome</h1>
+<form class="nice-wrap" ng-submit="$ctrl.addNewUser($ctrl.name)">
+    <input class="nice-textbox" autofocus type="text" ng-model="$ctrl.name" placeholder="Name" />
+    <!--<label class="nice-label" for="Username">Name</label>-->
+    <!--<input type="submit" value="Submit">-->
+</form>
+</div>
+</ui-view>

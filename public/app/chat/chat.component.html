@@ -1,0 +1,44 @@
+<div id="chat_app">
+    <div id="chat_list_container">
+        <div id="chat_head">CHAT</div>
+        <div id="user_list_container">
+
+            <li id="user_list" ng-repeat="room in $ctrl.rooms track by $index">
+                <div id="profile_pic"><img src="assets/images/face.png"></div>
+                <div id="name_n_state" ng-click="$ctrl.selectUser(room)">
+                    <div id="name">{{room.name}}
+                        <div id="msg_count"></div>
+                    </div>
+                    <div id="state"></div>
+                </div>
+            </li>
+
+            <li id="user_list" ng-repeat="us in $ctrl.users track by $index" ng-if="us.name !=  $ctrl.user.name">
+                <div id="profile_pic"><img src="assets/images/face.png"></div>
+                <div id="name_n_state" ng-click="$ctrl.selectUser(us)">
+                    <div id="name">{{us.name}}
+                        <div id="msg_count" us="us" msg-count="$ctrl.msgs"><div>{{us.count}}</div></div>
+                    </div>
+                    <div id="state"></div>
+                </div>
+            </li>
+        </div>
+    </div>
+    <div id="chat_msgs_container">
+        <div id="user_head_container"><div class="ch_float_left" ng-bind="$ctrl.selectedUser.name"></div><div class="ch_float_right" ng-bind="$ctrl.user.name"></div></div>
+        <div id="msgs_container" scroll-bottom="$ctrl.msgs">
+            <li class="msg_container" ng-repeat="msg in $ctrl.msgs track by $index" 
+            ng-if="((msg.from.id == $ctrl.user.id && msg.to.id == $ctrl.selectedUser.id) || (msg.to.id == $ctrl.user.id && msg.from.id == $ctrl.selectedUser.id))" ng-class="msg.from.name == $ctrl.user.name ? 'my_msgs':'frnd_msgs'">
+                <div id="name" ng-style="{color : msg.from.color}" ng-if="msg.from.name != $ctrl.msgs[$index-1].from.name">{{msg.from.name}}</div>
+                <div>{{msg.msg}}</div>
+            </li>
+        </div>
+        <div id="msg_input_container">
+            <form ng-submit="$ctrl.onSend($ctrl.inputMsg)">
+                <div></div>
+                <input id="msg_input" autocomplete="off" type="text" ng-model="$ctrl.inputMsg">
+                <div></div>
+            </form>
+        </div>
+    </div>
+</div>
